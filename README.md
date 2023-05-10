@@ -1,7 +1,6 @@
 # TowerDefense
-SAE BUT INFO 1ere Année semestre 2 Baptiste, Matthias, Gaspard
 
-Ce projet est réalisé dans le but d'une SAE du semestre 2 du cursur BUT informatique en premiere année.
+Ce projet est réalisé dans le but d'une SAE du semestre 2 du cursus BUT informatique en premiere année.
 
 Le projet est de créer un jeu de type "Tower Defense" en 2d, par groupe de trois, ici composé de Baptiste Blanchet, Gaspard Pons et Matthias Trupin.
 
