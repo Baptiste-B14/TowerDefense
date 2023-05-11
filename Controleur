@@ -1,0 +1,59 @@
+package com.example.stationski;
+
+import com.example.stationski.Modele.Environnement;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.TilePane;
+
+
+import java.net.URL;
+
+import com.example.stationski.Modele.Environnement;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class Controleur implements Initializable {
+    @FXML
+    private TilePane root;
+
+    private Environnement env;
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        this.env = new Environnement();
+
+
+
+        root.setStyle("-fx-background-color:blue");
+        //root.getChildren().add(imageSnow);
+
+        for (int row = 0; row<this.env.getList().size(); row++){
+            if(this.env.getList().get(row) == 1){
+                URL urlIm=getClass().getResource("snow2.png");
+                Image im= new Image(String.valueOf(urlIm));
+                ImageView imageSnow = new ImageView();
+                imageSnow.setImage(im);
+
+                root.getChildren().add(imageSnow);
+
+            }else if(this.env.getList().get(row) == 0){
+                URL urlIm=getClass().getResource("snow01.png");
+                Image im= new Image(String.valueOf(urlIm));
+                ImageView imageSnow = new ImageView();
+                imageSnow.setImage(im);
+
+                root.getChildren().add(imageSnow);
+            }
+
+        }
+
+
+
+    }
+
+}
