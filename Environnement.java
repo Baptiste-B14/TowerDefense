@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Environnement {
+    private Terrain terrain;
 
     private int argent;
     private ArrayList<Integer> listeEnv;
@@ -14,14 +15,17 @@ public class Environnement {
 
 
     public Environnement(){
-
-       this.listeEnv = new ArrayList<Integer>(Arrays.asList(0,0,1,1,1,1,1,1,1,1     ,1,0,1,1,1,1,1,1,1,1,   1,0,0,0,1,1,1,1,1,1,    1,1,1,0,0,0,1,1,1,1,    1,1,1,1,1,1,0,0,0,0,  1,1,1,1,0,1,1,1,0,1 ,   1,1,1,1,0,0,0,1,0,1,    1,1,1,1,1,0,0,0,0,1   ));
+        this.terrain = new Terrain();
 
     }
 
 
-    public ArrayList<Integer> getList(){
-        return this.listeEnv;
+    public Terrain getTerrain(){return this.terrain;}
+
+
+
+    public void unTour(){
+
     }
 
 }
