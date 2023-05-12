@@ -1,8 +1,9 @@
 package com.example.stationski.Modele;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
-public abstract class Ennemi{
+public class Ennemi{
 
 
     private int pV;
@@ -12,8 +13,9 @@ public abstract class Ennemi{
     private Environnement env;
     public Ennemi (int pV, int posX, int posY, int vitesse, Environnement env){
         this.pV= pV;
-        this.posX.setValue(posX);
-        this.posY.setValue(posY);
+
+        this.posX = new SimpleIntegerProperty(posX);
+        this.posY = new SimpleIntegerProperty(posY);
         this.vitesse=vitesse;
         this.env = env;
 
