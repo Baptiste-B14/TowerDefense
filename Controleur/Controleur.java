@@ -1,5 +1,6 @@
-package com.example.stationski;
+package com.example.stationski.Controleur;
 
+import com.example.stationski.Main;
 import com.example.stationski.Modele.Ennemi;
 import com.example.stationski.Modele.Environnement;
 import com.example.stationski.Modele.Terrain;
@@ -33,6 +34,7 @@ public class Controleur implements Initializable {
     private Timeline gameLoop;
 
 
+
     private Environnement env;
 
 
@@ -55,7 +57,7 @@ public class Controleur implements Initializable {
 
         for (int row = 0; row<this.env.getTerrain().getList().size(); row++){
             if(this.env.getTerrain().getList().get(row) == 1){
-                URL urlIm=getClass().getResource("snow2.png");
+                URL urlIm= Main.class.getResource("snow2.png");
                 Image im= new Image(String.valueOf(urlIm));
                 ImageView imageSnow = new ImageView();
                 imageSnow.setImage(im);
@@ -63,7 +65,7 @@ public class Controleur implements Initializable {
                 root.getChildren().add(imageSnow);
 
             }else if(this.env.getTerrain().getList().get(row) == 0){
-                URL urlIm=getClass().getResource("snow01.png");
+                URL urlIm= Main.class.getResource("snow01.png");
                 Image im= new Image(String.valueOf(urlIm));
                 ImageView imageSnow = new ImageView();
                 imageSnow.setImage(im);
