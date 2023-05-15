@@ -13,7 +13,6 @@ public class Environnement {
     private ArrayList<Tour> listeTours;
     private Vague vague;
 
-
     public Environnement(){
         this.terrain = new Terrain();
 
