@@ -12,19 +12,25 @@ public class Environnement {
     private Capacite capa;
     private ArrayList<Tour> listeTours;
     private Vague vague;
+    private ArrayList<Ennemi> listEnnemis;
 
-    public Environnement(){
-        this.terrain = new Terrain();
+    public Environnement(Terrain terrain){
+        this.terrain = terrain;
+        this.listEnnemis = new ArrayList<Ennemi>();
 
     }
-
+    public void ajouterEnnemi(Ennemi ennemi){
+        this.listEnnemis.add(ennemi);
+    }
 
     public Terrain getTerrain(){return this.terrain;}
 
 
 
     public void unTour(){
-
+        for (int acteur = 0; acteur<this.listEnnemis.size(); acteur++){
+            this.listEnnemis.get(acteur).agit();
+        }
     }
 
 }
