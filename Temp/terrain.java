@@ -1,10 +1,11 @@
 package com.example.stationski.Modele;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Terrain {
-    private int largeur, hauteur;
+    private int largeurCase, hauteurCase;
     private int[] objectif ;
     private ArrayList<int[]> listeSpawn;
 
@@ -14,12 +15,14 @@ public class Terrain {
 
 
     public Terrain(int largeur, int hauteur, int nbSpawn){
-        this.listeTerrain = new ArrayList<Integer>(Arrays.asList(createTableauTerrain()));
-        this.largeur = largeur;
-        this.hauteur = hauteur;
+
+        this.largeurCase = largeur;
+        this.hauteurCase = hauteur;
         this.objectif = createObj();
         this.nbSpawn = nbSpawn;
         this.listeSpawn = createSpawn(nbSpawn);
+
+        this.listeTerrain = new ArrayList<Integer>(Arrays.asList(createTableauTerrain()));
     }
 
 
@@ -34,20 +37,20 @@ public class Terrain {
         switch(cote){
             case 1 :
                 posY = 0;
-                posX = (int)(Math.random()*largeur);
+                posX = (int)(Math.random()*largeurCase*16);
                 break;
             case 2 :
-                posY = (int)(Math.random()*hauteur);
-                posX = hauteur;
+                posY = (int)(Math.random()* hauteurCase*16);
+                posX = hauteurCase*16;
                 break;
 
             case 3:
-                posY = largeur;
-                posX = (int)(Math.random()*largeur);
+                posY = hauteurCase*16;
+                posX = (int)(Math.random()*largeurCase*16);
                 break;
             case 4 :
 
-                posY = (int)(Math.random()*hauteur);
+                posY = (int)(Math.random()* hauteurCase*16);
                 posX = 0;
                 break;
 
@@ -76,20 +79,20 @@ public class Terrain {
             switch(cote){
                 case 1 :
                     posY = 0;
-                    posX = (int)(Math.random()*largeur);
+                    posX = (int)(Math.random()*largeurCase);
                     break;
                 case 2 :
-                    posY = (int)(Math.random()*hauteur);
-                    posX = hauteur;
+                    posY = (int)(Math.random()* hauteurCase);
+                    posX = hauteurCase;
                     break;
 
                 case 3:
-                    posY = largeur;
-                    posX = (int)(Math.random()*largeur);
+                    posY = largeurCase;
+                    posX = (int)(Math.random()*largeurCase);
                     break;
                 case 4 :
 
-                    posY = (int)(Math.random()*hauteur);
+                    posY = (int)(Math.random()* hauteurCase);
                     posX = 0;
                     break;
 
@@ -105,20 +108,28 @@ public class Terrain {
         return spawns;
     }
 
+
+    public void genererEmplacementTour(){
+
+    }
+
+
     public Integer[] createTableauTerrain(){
-            Integer[] tableTerrain = new Integer[largeur*hauteur];
-        for(int hauteur = 0; hauteur <this.hauteur; hauteur++){
-            for(int largeur = 0; largeur<this.largeur; largeur++){
-                tableTerrain[hauteur*largeur+ largeur] = ((int)(Math.random()*4)/4);
-            }
-        }
-        for(int i=0;i<listeSpawn.size(); i++){
-            tableTerrain[largeur* listeSpawn.get(i)[1] + listeSpawn.get(i)[0] ] = 3;
+        Integer[] tableTerrain = new Integer[largeurCase* hauteurCase];
+        for(int indice = 0; indice<this.hauteurCase*this.largeurCase; indice++){
+
+                tableTerrain[indice] = ((int)(Math.random()*4)/3);
+
         }
 
-        tableTerrain[largeur *getObjY() + getObjX()] = 4;
 
-    return tableTerrain;
+        for(int i=0;i<this.listeSpawn.size(); i++){
+            tableTerrain[listeSpawn.get(i)[1]*16 + listeSpawn.get(i)[0] ] = 3;
+        }
+
+        tableTerrain[getObjY() + getObjX()] = 4;
+
+        return tableTerrain;
     }
 
 
