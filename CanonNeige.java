@@ -3,5 +3,4 @@ public class CanonNeige extends Tour{
         super(posX, posY, pV, ptsAttaque, range);
 
     }
-
 }
