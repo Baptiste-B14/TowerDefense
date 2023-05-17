@@ -1,13 +1,11 @@
-package com.example.stationski;
+package com.example.stationski.Controleur;
 
-
+import com.example.stationski.Main;
 import com.example.stationski.Modele.Ennemi;
 import com.example.stationski.Modele.Environnement;
 import com.example.stationski.Modele.Terrain;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
@@ -42,8 +40,8 @@ public class Controleur implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        this.env = new Environnement();
+        Terrain terrain = new Terrain(480/16,480/16,2);
+        this.env = new Environnement(terrain);
         Ennemi ennemi = new Ennemi(10, 20, 20, 1, this.env);
         this.env.ajouterEnnemi(ennemi);
 
@@ -56,18 +54,18 @@ public class Controleur implements Initializable {
 
         root.setStyle("-fx-background-color:blue");
         //root.getChildren().add(imageSnow);
-
+// 1 neige, 0 chemin ,  3 spawn , 4 objectif
         for (int row = 0; row<this.env.getTerrain().getList().size(); row++){
-            if(this.env.getTerrain().getList().get(row) == 1){
-                URL urlIm=getClass().getResource("snow2.png");
+            if(this.env.getTerrain().getList().get(row) == 1 || this.env.getTerrain().getList().get(row) == 3){
+                URL urlIm= Main.class.getResource("snow2.png");
                 Image im= new Image(String.valueOf(urlIm));
                 ImageView imageSnow = new ImageView();
                 imageSnow.setImage(im);
 
                 root.getChildren().add(imageSnow);
 
-            }else if(this.env.getTerrain().getList().get(row) == 0){
-                URL urlIm=getClass().getResource("snow01.png");
+            }else if(this.env.getTerrain().getList().get(row) == 0 || this.env.getTerrain().getList().get(row) == 4){
+                URL urlIm= Main.class.getResource("snow01.png");
                 Image im= new Image(String.valueOf(urlIm));
                 ImageView imageSnow = new ImageView();
                 imageSnow.setImage(im);
@@ -76,6 +74,7 @@ public class Controleur implements Initializable {
             }
 
         }
+        this.setTile();
 
         initAnimation();
         gameLoop.play();
@@ -83,9 +82,10 @@ public class Controleur implements Initializable {
 
     }
 
+
     public void setTile(){
 
-        URL urlIm=getClass().getResource("Chalet.png");
+        URL urlIm=Main.class.getResource("Chalet.png");
         Image flag= new Image(String.valueOf(urlIm));
         ImageView imageFlag = new ImageView();
         imageFlag.setImage(flag);
@@ -93,8 +93,10 @@ public class Controleur implements Initializable {
         imageFlag.setX(this.env.getTerrain().getObjX());
         imageFlag.setY(this.env.getTerrain().getObjY());
 
-        
+        panneauDeJeu.getChildren().add(imageFlag);
+
     }
+
 
 
     private void initAnimation(){
@@ -103,9 +105,9 @@ public class Controleur implements Initializable {
 
         KeyFrame kf = new KeyFrame(
                 Duration.seconds(0.017),
-                (ev ->{
-                    env.unTour();
-                })
+        (ev ->{
+            env.unTour();
+        })
         );
 
         gameLoop.getKeyFrames().add(kf);
