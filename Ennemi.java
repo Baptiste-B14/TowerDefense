@@ -11,13 +11,16 @@ public class Ennemi{
     private IntegerProperty posY;
     private int vitesse;
     private Environnement env;
-    public Ennemi (int pV, int posX, int posY, int vitesse, Environnement env){
+    private int butin;
+
+    public Ennemi (int pV, int posX, int posY, int vitesse, Environnement env, int butin){
         this.pV= pV;
 
         this.posX = new SimpleIntegerProperty(posX);
         this.posY = new SimpleIntegerProperty(posY);
         this.vitesse=vitesse;
         this.env = env;
+        this.butin = butin;
 
     }
 
@@ -34,6 +37,7 @@ public class Ennemi{
     public int getPosY() {
         return posY.getValue();
     }
+    public int getPV(){return this.pV;}
 
     public void agit(){
         deplacement();
@@ -44,5 +48,19 @@ public class Ennemi{
         posX.setValue(posX.getValue()+ (int)(Math.random()*3-1));
         posY.setValue(posY.getValue()+ (int)(Math.random()*3-1));
     }
+
+
+    public void prendDegats(int degat){
+        this.pV-= degat;
+    }
+
+    public int getButin() {
+        return butin;
+    }
+
+    public boolean estVivant (){
+        return pV>0;
+    }
+
 
 }
