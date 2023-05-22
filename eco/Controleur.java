@@ -6,6 +6,7 @@ import com.example.stationski.Modele.Environnement;
 import com.example.stationski.Modele.Terrain;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -114,4 +115,11 @@ public class Controleur implements Initializable {
 
         gameLoop.getKeyFrames().add(kf);
     }
+
+    @FXML
+    void SelectionTourCanonEau(ActionEvent event) {
+
+    }
+
+
 }
