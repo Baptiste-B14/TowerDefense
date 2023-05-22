@@ -23,8 +23,8 @@ public class Environnement {
         this.listEnnemis.add(ennemi);
     }
 
+    
     public Terrain getTerrain(){return this.terrain;}
-
 
 
     public void unTour(){
