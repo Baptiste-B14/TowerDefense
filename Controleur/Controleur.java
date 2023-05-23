@@ -82,6 +82,22 @@ public class Controleur implements Initializable {
 
 
     }
+    
+    
+    public void setTile(){
+
+        URL urlIm=Main.class.getResource("Chalet.png");
+        Image flag= new Image(String.valueOf(urlIm));
+        ImageView imageFlag = new ImageView();
+        imageFlag.setImage(flag);
+
+        imageFlag.setX(this.env.getTerrain().getObjX());
+        imageFlag.setY(this.env.getTerrain().getObjY());
+
+        panneauDeJeu.getChildren().add(imageFlag);
+
+    }
+
 
 
     private void initAnimation(){
