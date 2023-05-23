@@ -46,6 +46,11 @@ public class Controleur implements Initializable {
         Ennemi ennemi = new Ennemi(10, 20, 20, 1, this.env);
         this.env.ajouterEnnemi(ennemi);
          monnaie.textProperty().bind(env.getArgentP().asString());
+        
+        
+         ListChangeListener<Entite> listen = new ListObs(panneauDeJeu, env);
+        this.env.getListeTours().addListener(listen);
+        this.env.getVague().getListEnnemis().addListener(listen);
 
         Circle cercle = new Circle();
         cercle.setRadius(5);
