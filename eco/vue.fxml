@@ -89,6 +89,7 @@
    <bottom>
       <HBox alignment="TOP_CENTER" prefHeight="37.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
+            <Label text="argent : " />
             <Label fx:id="monnaie" textAlignment="RIGHT" />
          </children></HBox>
    </bottom>
