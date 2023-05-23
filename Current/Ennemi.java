@@ -1,4 +1,3 @@
-
 package fr.iut.montreuil.stationski.Modele;
 
 import javafx.beans.property.IntegerProperty;
@@ -6,7 +5,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class Ennemi{
 
-
+    public static int compteur=0;
+    private String id;
     private int pV;
     private IntegerProperty posX;
     private IntegerProperty posY;
@@ -22,7 +22,8 @@ public class Ennemi{
         this.vitesse=vitesse;
         this.env = env;
         this.butin = butin;
-
+        this.id = "E"+compteur;
+        compteur++;
     }
 
     public IntegerProperty getPosXP(){
@@ -32,6 +33,9 @@ public class Ennemi{
         return posY;
     }
 
+    public String getId (){
+        return id;
+    }
     public int getPosX() {
         return posX.getValue();
     }
@@ -42,6 +46,10 @@ public class Ennemi{
 
     public void agit(){
         deplacement();
+
+        // pour les test
+        this.prendDegats(1);
+        //
     }
 
     public void deplacement (){
