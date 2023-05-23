@@ -33,9 +33,10 @@ public class Controleur implements Initializable {
 
     private Timeline gameLoop;
 
-
-
     private Environnement env;
+    
+        @FXML
+    private Label monnaie;
 
 
     @Override
@@ -44,6 +45,7 @@ public class Controleur implements Initializable {
         this.env = new Environnement(terrain);
         Ennemi ennemi = new Ennemi(10, 20, 20, 1, this.env);
         this.env.ajouterEnnemi(ennemi);
+         monnaie.textProperty().bind(env.getArgentP().asString());
 
         Circle cercle = new Circle();
         cercle.setRadius(5);
@@ -95,4 +97,10 @@ public class Controleur implements Initializable {
 
         gameLoop.getKeyFrames().add(kf);
     }
+    
+     @FXML
+    void SelectionTourCanonEau(ActionEvent event) {
+
+    }
+
 }
