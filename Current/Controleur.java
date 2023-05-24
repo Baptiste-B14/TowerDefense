@@ -1,11 +1,14 @@
-package com.example.stationski.Controleur;
+package fr.iut.montreuil.stationski.Controleur;
 
-import com.example.stationski.Main;
-import com.example.stationski.Modele.Ennemi;
-import com.example.stationski.Modele.Environnement;
-import com.example.stationski.Modele.Terrain;
+import fr.iut.montreuil.stationski.Main;
+
+import fr.iut.montreuil.stationski.Modele.Ennemi;
+import fr.iut.montreuil.stationski.Modele.Entite;
+import fr.iut.montreuil.stationski.Modele.Terrain;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.ListChangeListener;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
@@ -16,12 +19,11 @@ import javafx.scene.layout.TilePane;
 
 import java.net.URL;
 
-import com.example.stationski.Modele.Environnement;
+import fr.iut.montreuil.stationski.Modele.Environnement;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
-import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controleur implements Initializable {
@@ -33,22 +35,20 @@ public class Controleur implements Initializable {
 
     private Timeline gameLoop;
 
+
+
     private Environnement env;
-    
-        @FXML
-    private Label monnaie;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Terrain terrain = new Terrain();
+        Terrain terrain = new Terrain(480/16,480/16,2);
         this.env = new Environnement(terrain);
-        Ennemi ennemi = new Ennemi(10, 20, 20, 1, this.env);
+        Ennemi ennemi = new Ennemi(10, 20, 20, 1, env, 1);
         this.env.ajouterEnnemi(ennemi);
-         monnaie.textProperty().bind(env.getArgentP().asString());
-        
-        
-         ListChangeListener<Entite> listen = new ListObs(panneauDeJeu, env);
+
+
+        ListChangeListener<Entite> listen = new ListObs(panneauDeJeu, env);
         this.env.getListeTours().addListener(listen);
         this.env.getVague().getListEnnemis().addListener(listen);
 
@@ -61,9 +61,9 @@ public class Controleur implements Initializable {
 
         root.setStyle("-fx-background-color:blue");
         //root.getChildren().add(imageSnow);
-
+// 1 neige, 0 chemin ,  3 spawn , 4 objectif
         for (int row = 0; row<this.env.getTerrain().getList().size(); row++){
-            if(this.env.getTerrain().getList().get(row) == 1){
+            if(this.env.getTerrain().getList().get(row) == 1 || this.env.getTerrain().getList().get(row) == 3){
                 URL urlIm= Main.class.getResource("snow2.png");
                 Image im= new Image(String.valueOf(urlIm));
                 ImageView imageSnow = new ImageView();
@@ -71,7 +71,7 @@ public class Controleur implements Initializable {
 
                 root.getChildren().add(imageSnow);
 
-            }else if(this.env.getTerrain().getList().get(row) == 0){
+            }else if(this.env.getTerrain().getList().get(row) == 0 || this.env.getTerrain().getList().get(row) == 4){
                 URL urlIm= Main.class.getResource("snow01.png");
                 Image im= new Image(String.valueOf(urlIm));
                 ImageView imageSnow = new ImageView();
@@ -81,14 +81,15 @@ public class Controleur implements Initializable {
             }
 
         }
+        this.setTile();
 
         initAnimation();
         gameLoop.play();
 
 
     }
-    
-    
+
+
     public void setTile(){
 
         URL urlIm=Main.class.getResource("Chalet.png");
@@ -105,6 +106,10 @@ public class Controleur implements Initializable {
 
 
 
+
+
+
+
     private void initAnimation(){
         gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);
@@ -118,10 +123,10 @@ public class Controleur implements Initializable {
 
         gameLoop.getKeyFrames().add(kf);
     }
-    
-     @FXML
+
+
+    @FXML
     void SelectionTourCanonEau(ActionEvent event) {
 
     }
-
 }
