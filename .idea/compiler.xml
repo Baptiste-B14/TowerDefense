@@ -6,11 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="SAE tower def" />
+        <module name="StationSki" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="SAE tower def" target="18" />
       <module name="StationSki" target="18" />
     </bytecodeTargetLevel>
   </component>
