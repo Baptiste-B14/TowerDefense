@@ -7,9 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="StationSki" />
+        <module name="SAE tower def" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="SAE tower def" target="18" />
       <module name="StationSki" target="18" />
     </bytecodeTargetLevel>
   </component>
