@@ -1,114 +1,89 @@
-package com.grille.appliatrous.algos;
+package fr.iut.montreuil.stationski.Modele;
 
-import modele.Grille;
-import modele.Sommet;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.PriorityQueue;
+
+import java.util.*;
 
 public class Dijkstra {
 
-	private Grille g;
-	private Sommet source;
-	/**
-	 * Associe à chaque sommet son coût minimal d'accès depuis le sommet source
-	 */
-	private Map<Sommet, Double> couts;
-	/**
-	 * Associe à chaque sommet son prédécesseur dans le chemin de coût minimal vers le sommet source
-	 */
-	private Map<Sommet, Sommet> predecesseurs;
-	/**
-	 * Liste des sommets de la composante connexe de g obtenue par Dijkstra depuis le sommet source
-	 */
-	private ArrayList<Sommet> parcours;
 
-	public Dijkstra(Grille g, Sommet source) {
-		this.g = g;
-		this.source = source;
-		couts = new HashMap<>();
-		parcours = new ArrayList<>();
-		predecesseurs = new HashMap<>();
-		algoDijkstra();
-	}
-
-	/**
-	 * Exécute l'algo Dijkstra sur g à partir du sommet source. Remplit la liste parcours avec les sommets dans l'ordre
-	 * de visite. Remplit la map predecesseurs en indiquant quel est le prédécesseur de chaque sommet. Le prédécesseur
-	 * du sommet source est le sommet null. Remplit la map des coûts afin de pouvoir comparer si le coût actuel est
-	 * inférieur au coût déjà mémorisé dans la file de priorité s'il y en a un.
-	 */
-	private void algoDijkstra() {
-		// File de priorité. Le premier à sortir est celui qui a le coût le plus faible.
-		PriorityQueue<SommetCout> fifo = new PriorityQueue<>();
+    private Sommet cible;
+    private Sommet source;
+    private Grille grille;
+    private ArrayList <Sommet> parcours ;
+    private Map<Sommet, Sommet> predecesseurs;
 
 
-		//TODO
+    // TO DO : coder classe Sommet
+    //         coder classe tableau2D
+    //         coder methode voisins dans tableau2D
 
-		fifo.add(new SommetCout(source, source.getPoids()));
+    public Dijkstra (Terrain terrain, Sommet source, Sommet cible){
+        this.cible = cible;
+        this.source = source;
+        this.grille = new Grille(terrain, this.source, this.cible);
+        predecesseurs = new HashMap<>();
+        parcours= new ArrayList<Sommet>();
+        algo();
+    }
 
-		SommetCout courant;
+    public void algo (){
+        PriorityQueue<Sommet> listeàAnalyser = new PriorityQueue<Sommet>();
+        listeàAnalyser.add(this.source);
+        this.source.setReached(true);
+        Sommet courant;
+        while (!cible.isReached() && !listeàAnalyser.isEmpty()) {
 
+            courant = listeàAnalyser.poll();
+            Iterator ListAdj = grille.getVoisins(courant).iterator();
+            Sommet sommet;
+            do {
+                sommet = (Sommet)ListAdj.next();
+                if(!sommet.isReached()){
+                    listeàAnalyser.add(sommet);
+                    predecesseurs.put(sommet, courant);
+                    sommet.setReached(true);
+                }
+            } while(!ListAdj.hasNext() && !cible.isReached());
+        }
+        if (cible.isReached()){
+            courant = this.cible;
+            while (!courant.equals(this.source)){
+                parcours.add(courant);
+                courant = predecesseurs.get(courant);
+            }
+        }
+    }
 
-		while(!fifo.isEmpty()){
-
-			courant = fifo.poll();
-
-			for(Sommet s : g.adjacents(courant.getS())){
-				double cout = courant.getCout() + s.getPoids();
-
-				if(!predecesseurs.containsKey(s) || couts.get(s)>cout){
-					predecesseurs.put(s, courant.getS());
-					fifo.add(new SommetCout(s, cout));
-					couts.put(s, cout);
-					parcours.add(s);
-
-				}
-			}
-
-
-		}
+    private void clear() {
+        this.predecesseurs.clear();
+        this.parcours.clear();
+    }
 
 
 
 
+    /*************************************************
+     **** Pas de modifications à faire ci-dessous ****
+     *************************************************/
 
-	}
+    public ArrayList<Sommet> getParcours() {
+        return parcours;
+    }
 
-	/*************************************************
-	 **** Pas de modifications à faire ci-dessous ****
-	 *************************************************/
+    public Map<Sommet, Sommet> getPredecesseurs() {
+        return predecesseurs;
+    }
 
-	public ArrayList<Sommet> getParcours() {
-		return parcours;
-	}
+    public Sommet getSource() {
+        return source;
+    }
 
-	public Map<Sommet, Sommet> getPredecesseurs() {
-		return predecesseurs;
-	}
+    public void setSource(Sommet source) {
+        this.source = source;
+        clear();
+        algo();
+    }
 
-	public Sommet getSource() {
-		return source;
-	}
-
-	public void setSource(Sommet source) {
-		this.source = source;
-		clear();
-		algoDijkstra();
-	}
-
-	public void setG(Grille g) {
-		this.g = g;
-		clear();
-		algoDijkstra();
-	}
-
-	private void clear() {
-		this.predecesseurs.clear();
-		this.couts.clear();
-		this.parcours.clear();
-	}
 
 }
