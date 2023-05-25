@@ -48,7 +48,7 @@ public class Controleur implements Initializable {
         ListChangeListener<Entite> listen = new ListObs(panneauDeJeu, env);
 
 
-        Terrain terrain = new Terrain(480/16,480/16,2);
+        Terrain terrain = new Terrain(16,16,2);
         this.env = new Environnement(terrain);
         Ennemi ennemi = new Ennemi(10, 20, 20, 1, env, 1);
         monnaie.textProperty().bind(env.getArgentP().asString());
@@ -81,7 +81,7 @@ public class Controleur implements Initializable {
             }
 
         }
-        this.setTile();
+        //this.setTile();
 
         initAnimation();
         gameLoop.play();
