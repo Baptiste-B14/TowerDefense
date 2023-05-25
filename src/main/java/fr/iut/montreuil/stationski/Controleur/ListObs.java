@@ -9,8 +9,6 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 
 import java.net.URL;
 
@@ -45,7 +43,12 @@ public class ListObs implements ListChangeListener<Entite> {
             URL urlIm;
         if(e instanceof Ennemi){
 
-            urlIm= Main.class.getResource("skieur1.png");
+            if (e instanceof SkieurBasique) {
+                urlIm = Main.class.getResource("skieur1.png");
+            }
+            else {
+                urlIm = Main.class.getResource("Chalet.png");
+            }
 
 
 
