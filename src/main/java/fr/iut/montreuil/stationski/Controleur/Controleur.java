@@ -50,7 +50,7 @@ public class Controleur implements Initializable {
 
         Terrain terrain = new Terrain(480/16,480/16,2);
         this.env = new Environnement(terrain);
-        Ennemi ennemi = new Ennemi(10, 20, 20, 10000, env, 1);
+        Ennemi ennemi = new Ennemi(10, 20, 20, 1, env, 1);
         monnaie.textProperty().bind(env.getArgentP().asString());
         this.env.getVague().getListEnnemis().addListener(listen);
 
