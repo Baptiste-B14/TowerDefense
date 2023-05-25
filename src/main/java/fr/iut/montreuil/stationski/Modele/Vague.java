@@ -5,12 +5,10 @@ package fr.iut.montreuil.stationski.Modele;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
-
 public class Vague {
 
     private int numeroVague;
-    private double pourcentChanceSkieur;
+    private double pourcentChanceSkieurBasique;
     private double pourcentChanceSnowboardeur;
     private double pourcentChanceLuge;
     private double pourcentChanceBobsleigh;
@@ -19,7 +17,7 @@ public class Vague {
     private Environnement env;
     public Vague (int numeroVague, double pourcentChanceSkieur, double pourcentChanceSnowboardeur, double pourcentChangeLuge, double pourcentChanceYeti, Environnement env){
         this.numeroVague=numeroVague; // this.numeroVague = 0;
-        this.pourcentChanceSkieur=pourcentChanceSkieur;
+        this.pourcentChanceSkieurBasique =pourcentChanceSkieur;
         this.pourcentChanceSnowboardeur=pourcentChanceSnowboardeur;
         this.pourcentChanceLuge=pourcentChangeLuge;
         this.pourcentChanceYeti=pourcentChanceYeti;
@@ -36,9 +34,9 @@ public class Vague {
     public void prochaineVague(){
         // Initialisation de tous les paramètres de génération des Ennemis :
         if (numeroVague<=3)
-            this.pourcentChanceSkieur = -(double)(0.6/3)*numeroVague + 0.8;
+            this.pourcentChanceSkieurBasique = -(double)(0.6/3)*numeroVague + 0.8;
         else
-            this.pourcentChanceSkieur = -0.25*numeroVague + 0.2;
+            this.pourcentChanceSkieurBasique = -0.25*numeroVague + 0.2;
 
         if (numeroVague<=3)
             this.pourcentChanceSnowboardeur = -(double)(1/6)*numeroVague + 0.25 ;
@@ -54,8 +52,8 @@ public class Vague {
 
         // Génération des ennemis jusqu'à avoir 10 ennemis :
         while (this.listEnnemis.size()<10){
-            if ((Math.random() * 1)<this.pourcentChanceSkieur)
-                this.listEnnemis.add(new Ennemi(100, 1, 1, 2, env, 5)); // new Skieur
+            if ((Math.random() * 1)<this.pourcentChanceSkieurBasique)
+                this.listEnnemis.add(new SkieurBasique(100, 1, 1, 2, env, 5)); // new Skieur
 
             if ((Math.random() * 1)<this.pourcentChanceSnowboardeur)
                 this.listEnnemis.add(new Ennemi(100, 1, 1, 2, env, 10)); // new Snowboardeur
