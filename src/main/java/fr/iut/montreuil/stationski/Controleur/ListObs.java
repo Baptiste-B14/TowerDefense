@@ -64,7 +64,7 @@ public class ListObs implements ListChangeListener<Entite> {
 
 
         }else if (e instanceof Tour){
-            urlIm = Main.class.getResource("skieur1.png");
+            urlIm = Main.class.getResource("watertower.png");
 
 
             Image im= new Image(String.valueOf(urlIm));

@@ -51,6 +51,8 @@ public class Environnement {
         for (int defense = this.listeTours.size()-1; defense>=0; defense--){
             this.listeTours.get(defense).agit();
 
+
+            //non testé : fonctionnement théroque de la suppression d'une tour ET de la case en dessous (qui est de 5)
             if (!this.listeTours.get(defense).estVivant()){
                 xTour = this.listeTours.get(defense).getPosX();
                 yTour = this.listeTours.get(defense).getPosY();
