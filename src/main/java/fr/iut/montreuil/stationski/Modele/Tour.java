@@ -9,13 +9,12 @@ public class Tour extends Entite {
     private int ptsAttaque;
     private int range;
     private Ennemi ennemiCible;
-    private int prix;
+    private static int prix = 500;
 
     public Tour (int pv, int posX, int posY, int ptsAttaque, int range, Environnement env){
         super(pv, posX, posY, env);
         this.ptsAttaque=ptsAttaque;
         this.range=range;
-        this.prix = 500;
 
     }
 
@@ -32,6 +31,10 @@ public class Tour extends Entite {
             }
         }
 
+    }
+
+    public int getPrix(){
+        return prix;
     }
 
 

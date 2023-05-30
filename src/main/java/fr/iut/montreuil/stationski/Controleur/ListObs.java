@@ -25,7 +25,7 @@ public class ListObs implements ListChangeListener<Entite> {
     public void onChanged(Change<? extends Entite> c){
 
         while(c.next()){
-            System.out.println("change");
+            //System.out.println("change");
             for(Entite e : c.getAddedSubList()){
 
                 creerSprite(e);

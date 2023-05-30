@@ -19,9 +19,9 @@ public class Ennemi extends Entite {
 
     public void agit(){
         deplacement();
-        System.out.println("se deplace");
+        //System.out.println("se deplace");
         this.prendDegats(1);
-        System.out.println("souffre");
+        //System.out.println("souffre");
     }
 
     public void deplacement (){

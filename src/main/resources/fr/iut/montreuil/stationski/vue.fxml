@@ -27,7 +27,7 @@
                               <Image url="@canonEau.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="62.0" prefWidth="67.0" text="Canon à eau" textAlignment="CENTER" wrapText="true" />
+                        <Label prefHeight="62.0" prefWidth="67.0" text="Canon à eau (500€)" textAlignment="CENTER" wrapText="true" />
                      </children>
                   </VBox>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
