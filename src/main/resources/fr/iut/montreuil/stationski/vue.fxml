@@ -22,7 +22,7 @@
                <children>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <ImageView fitHeight="57.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="57.0" fitWidth="67.0" onMouseClicked="#creationTourTest" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@canonEau.png" />
                            </image>
@@ -87,11 +87,24 @@
       </VBox>
    </right>
    <bottom>
-      <HBox alignment="TOP_CENTER" prefHeight="37.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="37.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
+            <Button mnemonicParsing="false" onAction="#creationTourTest" text="CreaTour" />
+            <Label text="PV :" />
+            <Label fx:id="PV" prefHeight="16.0" prefWidth="11.0">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Label>
             <Label text="argent : " />
             <Label fx:id="monnaie" textAlignment="RIGHT" />
-         </children></HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets></HBox>
    </bottom>
    <left>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />

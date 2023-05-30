@@ -53,7 +53,7 @@ public class Vague {
         // Génération des ennemis jusqu'à avoir 10 ennemis :
         while (this.listEnnemis.size()<10){
             if ((Math.random() * 1)<this.pourcentChanceSkieurBasique)
-                this.listEnnemis.add(new SkieurBasique(100, 1, 1, 1, env, 5)); // new Skieur
+                this.listEnnemis.add(new SkieurBasique(100, 1, 1, 1 , env, 5)); // new Skieur
 
             if ((Math.random() * 1)<this.pourcentChanceSnowboardeur)
                 this.listEnnemis.add(new Ennemi(100, 1, 1, 2, env, 10)); // new Snowboardeur

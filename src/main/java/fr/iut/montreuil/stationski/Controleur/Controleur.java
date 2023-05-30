@@ -2,9 +2,7 @@ package fr.iut.montreuil.stationski.Controleur;
 
 import fr.iut.montreuil.stationski.Main;
 
-import fr.iut.montreuil.stationski.Modele.Ennemi;
-import fr.iut.montreuil.stationski.Modele.Entite;
-import fr.iut.montreuil.stationski.Modele.Terrain;
+import fr.iut.montreuil.stationski.Modele.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
@@ -20,7 +18,6 @@ import javafx.scene.layout.TilePane;
 
 import java.net.URL;
 
-import fr.iut.montreuil.stationski.Modele.Environnement;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
@@ -40,6 +37,10 @@ public class Controleur implements Initializable {
     @FXML
     private Label monnaie;
 
+    @FXML
+    private Label PV;
+
+
     private Environnement env;
 
 
@@ -52,18 +53,20 @@ public class Controleur implements Initializable {
         this.env = new Environnement(terrain);
         Ennemi ennemi = new Ennemi(10, 20, 20, 1, env, 1);
         monnaie.textProperty().bind(env.getArgentP().asString());
+        PV.textProperty().bind((env.getPVP().asString()));
         this.env.getVague().getListEnnemis().addListener(listen);
+        this.env.getListeTours().addListener(listen);
 
 
         //this.env.getListeTours().addListener(listen);
 
 
-
+        // ici code pour l'aspect des cases
         root.setStyle("-fx-background-color:blue");
         //root.getChildren().add(imageSnow);
-// 1 neige, 0 chemin ,  3 spawn , 4 objectif
+// 1 neige, 0 chemin ,  3 spawn , 4 objectif, 5 tour
         for (int row = 0; row<this.env.getTerrain().getList().size(); row++){
-            if(this.env.getTerrain().getList().get(row) == 1 || this.env.getTerrain().getList().get(row) == 3){
+            if(this.env.getTerrain().getList().get(row) == 1 || this.env.getTerrain().getList().get(row) == 3 || this.env.getTerrain().getList().get(row) == 5){
                 URL urlIm= Main.class.getResource("snow2.png");
                 Image im= new Image(String.valueOf(urlIm));
                 ImageView imageSnow = new ImageView();
@@ -124,9 +127,31 @@ public class Controleur implements Initializable {
         gameLoop.getKeyFrames().add(kf);
     }
 
-
     @FXML
-    void SelectionTourCanonEau(ActionEvent event) {
+    int creationTourTest(ActionEvent event) {
+        int x=0;
+        int y=0;
+        Tour t;
+        for (int row = 0; row<this.env.getTerrain().getList().size(); row++){
 
+            if (this.env.getTerrain().getList().get(row) == 1){
+                t = new Tour(3,x,y,2,2,env);
+                env.getTerrain().getList().set(row, 5);
+                env.addTour(t);
+                return 0;
+            }
+            if (row%32 ==0 && row!=0){
+                y++;
+            }
+
+            x++;
+            if (x>32){
+                x=0;
+            }
+        }
+
+
+        return 1;
     }
+
 }

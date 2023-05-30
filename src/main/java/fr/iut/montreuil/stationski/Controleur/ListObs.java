@@ -34,6 +34,8 @@ public class ListObs implements ListChangeListener<Entite> {
             for(Entite  e : c.getRemoved()){
                 Node sprite = panneauJeu.lookup("#" + e.getId());
                 panneauJeu.getChildren().remove(sprite);
+
+
             }
 
         }
@@ -50,9 +52,6 @@ public class ListObs implements ListChangeListener<Entite> {
                 urlIm = Main.class.getResource("Chalet.png");
             }
 
-
-
-
             Image im= new Image(String.valueOf(urlIm));
             ImageView imageEn = new ImageView();
             imageEn.setImage(im);
@@ -64,9 +63,23 @@ public class ListObs implements ListChangeListener<Entite> {
             panneauJeu.getChildren().add(imageEn);
 
 
-        }else {
-            //urlIm =
+        }else if (e instanceof Tour){
+            urlIm = Main.class.getResource("skieur1.png");
 
+
+            Image im= new Image(String.valueOf(urlIm));
+            ImageView imageEn = new ImageView();
+            imageEn.setImage(im);
+
+            imageEn.translateXProperty().bind(e.getPosXP());
+            imageEn.translateYProperty().bind(e.getPosYP());
+
+            imageEn.setId(e.getId());
+            panneauJeu.getChildren().add(imageEn);
         }
+
+
+
+
     }
 }

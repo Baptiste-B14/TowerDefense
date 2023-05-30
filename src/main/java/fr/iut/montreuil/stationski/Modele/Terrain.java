@@ -22,7 +22,7 @@ public class Terrain {
         this.nbSpawn = nbSpawn;
         //this.listeSpawn = createSpawn(nbSpawn);
 
-
+        // terrain de 32*32
         this.listeTerrain = new ArrayList<Integer>(Arrays.asList(
                 1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
                 1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,

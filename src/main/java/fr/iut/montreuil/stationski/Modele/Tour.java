@@ -31,6 +31,7 @@ public class Tour extends Entite {
                 this.ennemiCible.prendDegats(ptsAttaque);
             }
         }
+
     }
 
 
