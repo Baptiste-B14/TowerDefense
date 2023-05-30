@@ -3,15 +3,17 @@ package fr.iut.montreuil.stationski.Modele;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
+import java.util.ArrayList;
+
 public class Ennemi extends Entite {
     private int vitesse;
     private int butin;
-
-    public Ennemi (int pv, int posX, int posY, int vitesse, Environnement env, int butin){
+    private ArrayList<Sommet> parcours;
+    public Ennemi (int pv, int posX, int posY, int vitesse, Environnement env, int butin, ArrayList<Sommet> parcours){
         super(pv, posX, posY, env);
         this.vitesse=vitesse;
         this.butin = butin;
-
+        this.parcours = parcours;
     }
 
 
@@ -19,9 +21,9 @@ public class Ennemi extends Entite {
 
     public void agit(){
         deplacement();
-        System.out.println("se deplace");
+        //System.out.println("se deplace");
         this.prendDegats(1);
-        System.out.println("souffre");
+        //System.out.println("souffre");
     }
 
     public void deplacement (){
