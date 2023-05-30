@@ -16,12 +16,14 @@ public class Environnement {
     private Capacite capa;
     private ObservableList<Tour> listeTours;
     private Vague vague;
+    private IntegerProperty PV;
 
     public Environnement(Terrain terrain){
         this.terrain = terrain;
         this.vague = new Vague(1, 100,6,9,0,this);
         this.listeTours = FXCollections.observableArrayList();
         this.argent = new SimpleIntegerProperty(500);
+        this.PV = new SimpleIntegerProperty(5);
 
 
     }
@@ -35,7 +37,8 @@ public class Environnement {
 
 
     public void unTour(){
-
+        int xTour;
+        int yTour;
 
         for (int acteur = this.vague.getListEnnemis().size()-1; acteur>=0; acteur--){
             this.vague.getListEnnemis().get(acteur).agit();
@@ -45,16 +48,49 @@ public class Environnement {
                 this.vague.getListEnnemis().remove(acteur);
             }
         }
+        for (int defense = this.listeTours.size()-1; defense>=0; defense--){
+            this.listeTours.get(defense).agit();
+
+
+            //non testé : fonctionnement théroque de la suppression d'une tour ET de la case en dessous (qui est de 5)
+            if (!this.listeTours.get(defense).estVivant()){
+                xTour = this.listeTours.get(defense).getPosX();
+                yTour = this.listeTours.get(defense).getPosY();
+
+                //y*32+x
+                this.terrain.getList().set((yTour*32+xTour),1);
+
+                this.listeTours.remove(defense);
+
+            }
+        }
 
         this.vague.prochaineVague();
 
 
     }
 
+    public IntegerProperty getPVP() {
+        return PV;
+    }
+
+
+    public int getPV() {
+        return PV.getValue();
+    }
+
+    public void perdreVie (int degat){
+        this.PV.setValue(this.PV.getValue()- degat);
+    }
+
 
     public void addTour(Tour t){
         this.listeTours.add(t);
 
+    }
+
+    public void removeTour(Tour t){
+        listeTours.remove(t);
     }
 
     public ObservableList<Tour> getListeTours(){

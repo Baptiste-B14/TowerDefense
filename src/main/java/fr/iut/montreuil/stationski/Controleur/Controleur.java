@@ -12,6 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
@@ -37,6 +39,12 @@ public class Controleur implements Initializable {
     @FXML
     private Label monnaie;
 
+    @FXML
+    private Label PV;
+
+    @FXML
+    private ImageView imageCanonEau;
+
     private Environnement env;
 
 
@@ -49,18 +57,22 @@ public class Controleur implements Initializable {
         this.env = new Environnement(terrain);
         //Ennemi ennemi = new Ennemi(10, 20, 20, 1, env, 1);
         monnaie.textProperty().bind(env.getArgentP().asString());
+        PV.textProperty().bind((env.getPVP().asString()));
         this.env.getVague().getListEnnemis().addListener(listen);
+        this.env.getListeTours().addListener(listen);
+
+        imageCanonEau.setOnMouseClicked(e -> creationTourTest());
 
 
         //this.env.getListeTours().addListener(listen);
 
 
-
+        // ici code pour l'aspect des cases
         root.setStyle("-fx-background-color:blue");
         //root.getChildren().add(imageSnow);
-// 1 neige, 0 chemin ,  3 spawn , 4 objectif
+// 1 neige, 0 chemin ,  3 spawn , 4 objectif, 5 tour
         for (int row = 0; row<this.env.getTerrain().getList().size(); row++){
-            if(this.env.getTerrain().getList().get(row) == 1 || this.env.getTerrain().getList().get(row) == 3){
+            if(this.env.getTerrain().getList().get(row) == 1 || this.env.getTerrain().getList().get(row) == 3 || this.env.getTerrain().getList().get(row) == 5){
                 URL urlIm= Main.class.getResource("snow2.png");
                 Image im= new Image(String.valueOf(urlIm));
                 ImageView imageSnow = new ImageView();
@@ -127,9 +139,43 @@ public class Controleur implements Initializable {
         gameLoop.getKeyFrames().add(kf);
     }
 
-
+    // methode de cration d'une tour (ATTENTION : ici une tour générique)
+    // actuellement la méthode est relié au bouton ET a l'image de watercanon (mais ne fonctionne pas quand on clique)
+    // notion de prix non implanté
+    // PB : je crois qu'il y a un probleme de x et y, j'ai du raté ma conversion de la liste en ligne et col
     @FXML
-    void SelectionTourCanonEau(ActionEvent event) {
+    int creationTourTest() {
+        System.out.println("click");
+        int x=0;
+        int y=0;
+        // la tour ref est necessaire pour avoir le prix de la tour, ici ref n'est pas placée
+        Tour ref = new Tour(1,0,0,2,3,env);
+        Tour t;
+        if (this.env.getArgent() >= ref.getPrix()) {
+            for (int row = 0; row < this.env.getTerrain().getList().size(); row++) {
 
+                if (this.env.getTerrain().getList().get(row) == 1) {
+                    t = new Tour(3, x, y, 2, 2, env);
+                    env.getTerrain().getList().set(row, 5);
+                    env.addTour(t);
+                    this.env.retraitArgent(t.getPrix());
+                    System.out.println("la tour a été placée en x: "+t.getPosX()+" et en y: "+t.getPosY());
+                    return 0;
+                }
+                if (row % 32 == 0 && row != 0) {
+                    y++;
+                }
+
+                x++;
+                if (x > 32) {
+                    x = 0;
+                }
+            }
+        }
+        System.out.println("pas assez d'argent pour acheter une tour");
+        return 1;
     }
+
+
+
 }
