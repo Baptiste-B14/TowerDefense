@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 public class Terrain {
     private int largeurCase, hauteurCase;
+    private Sommet source, cible;
     private int[] objectif ;
     private ArrayList<int[]> listeSpawn;
 
@@ -14,13 +15,16 @@ public class Terrain {
     private int nbSpawn;
 
 
-    public Terrain(int largeur, int hauteur, int nbSpawn){
+    public Terrain(int largeur, int hauteur, int nbSpawn, Sommet source, Sommet cible){
 
         this.largeurCase = largeur;
         this.hauteurCase = hauteur;
+        this.source = source;
+        this.cible = cible;
         //this.objectif = createObj();
         this.nbSpawn = nbSpawn;
         //this.listeSpawn = createSpawn(nbSpawn);
+
 
 
         this.listeTerrain = new ArrayList<Integer>(Arrays.asList(
@@ -66,6 +70,18 @@ public class Terrain {
         return this.listeTerrain;
     }
 
+    public int getLargeurCase(){return this.largeurCase;}
+
+    public int getHauteurCase(){return this.hauteurCase;}
+
+    public Sommet getSource(){
+        return this.source;
+    }
+
+    public Sommet getCible() {
+        return cible;
+    }
+
     public int[] createObj(){
 
         int posY, posX;
@@ -107,6 +123,8 @@ public class Terrain {
         return this.objectif[1];
     }
 
+
+/*
     public ArrayList<int[]> createSpawn(int nbSpawn){
         ArrayList<int[]> spawns = new ArrayList<int[]>();
         for(int i =0; i<nbSpawn; i++){
@@ -143,13 +161,13 @@ public class Terrain {
 
         return spawns;
     }
-
+*/
 
     public void genererEmplacementTour(){
 
     }
 
-
+/*
     public Integer[] createTableauTerrain(){
         Integer[] tableTerrain = new Integer[largeurCase* hauteurCase];
         for(int indice = 0; indice<this.hauteurCase*this.largeurCase; indice++){
@@ -158,16 +176,16 @@ public class Terrain {
 
         }
 
-/*
+
         for(int i=0;i<this.listeSpawn.size(); i++){
             tableTerrain[listeSpawn.get(i)[1]*16 + listeSpawn.get(i)[0] ] = 3;
         }
-*/
+
         tableTerrain[getObjY() + getObjX()] = 4;
 
         return tableTerrain;
     }
-
+*/
 
 
 }

@@ -2,9 +2,7 @@ package fr.iut.montreuil.stationski.Controleur;
 
 import fr.iut.montreuil.stationski.Main;
 
-import fr.iut.montreuil.stationski.Modele.Ennemi;
-import fr.iut.montreuil.stationski.Modele.Entite;
-import fr.iut.montreuil.stationski.Modele.Terrain;
+import fr.iut.montreuil.stationski.Modele.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
@@ -20,7 +18,6 @@ import javafx.scene.layout.TilePane;
 
 import java.net.URL;
 
-import fr.iut.montreuil.stationski.Modele.Environnement;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
@@ -48,9 +45,9 @@ public class Controleur implements Initializable {
         ListChangeListener<Entite> listen = new ListObs(panneauDeJeu, env);
 
 
-        Terrain terrain = new Terrain(16,16,2);
+        Terrain terrain = new Terrain(32,32,1, new Sommet(0,8, false), new Sommet(10, 0,false));
         this.env = new Environnement(terrain);
-        Ennemi ennemi = new Ennemi(10, 20, 20, 1, env, 1);
+        //Ennemi ennemi = new Ennemi(10, 20, 20, 1, env, 1);
         monnaie.textProperty().bind(env.getArgentP().asString());
         this.env.getVague().getListEnnemis().addListener(listen);
 
@@ -88,7 +85,13 @@ public class Controleur implements Initializable {
 
 
     }
+/*
+    public void dessineDijkstra(){
+        for(Sommet s :this.env.getVague().getParcours()){
 
+        }
+    }
+*/
 
     public void setTile(){
 
