@@ -12,6 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
@@ -40,6 +42,8 @@ public class Controleur implements Initializable {
     @FXML
     private Label PV;
 
+    @FXML
+    private ImageView imageCanonEau;
 
     private Environnement env;
 
@@ -56,6 +60,8 @@ public class Controleur implements Initializable {
         PV.textProperty().bind((env.getPVP().asString()));
         this.env.getVague().getListEnnemis().addListener(listen);
         this.env.getListeTours().addListener(listen);
+
+        imageCanonEau.setOnMouseClicked(e -> creationTourTest());
 
 
         //this.env.getListeTours().addListener(listen);
@@ -132,11 +138,11 @@ public class Controleur implements Initializable {
     // notion de prix non implanté
     // PB : je crois qu'il y a un probleme de x et y, j'ai du raté ma conversion de la liste en ligne et col
     @FXML
-    int creationTourTest(ActionEvent event) {
+    int creationTourTest() {
         System.out.println("click");
         int x=0;
         int y=0;
-        // la tour ref est necessaire pour avoir le prix de la tour, ici elle n'est pas placée
+        // la tour ref est necessaire pour avoir le prix de la tour, ici ref n'est pas placée
         Tour ref = new Tour(1,0,0,2,3,env);
         Tour t;
         if (this.env.getArgent() >= ref.getPrix()) {
@@ -160,10 +166,10 @@ public class Controleur implements Initializable {
                 }
             }
         }
-
         System.out.println("pas assez d'argent pour acheter une tour");
-
         return 1;
     }
+
+
 
 }
