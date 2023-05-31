@@ -25,7 +25,7 @@ public class ListObs implements ListChangeListener<Entite> {
     public void onChanged(Change<? extends Entite> c){
 
         while(c.next()){
-            System.out.println("change");
+
             for(Entite e : c.getAddedSubList()){
 
                 creerSprite(e);
@@ -40,14 +40,14 @@ public class ListObs implements ListChangeListener<Entite> {
     }
 
     public void creerSprite(Entite e){
-            URL urlIm;
+        URL urlIm;
         if(e instanceof Ennemi){
 
             if (e instanceof SkieurBasique) {
                 urlIm = Main.class.getResource("skieur1.png");
             }
             else {
-                urlIm = Main.class.getResource("Chalet.png");
+                urlIm = Main.class.getResource("skieur1.png");
             }
 
 
