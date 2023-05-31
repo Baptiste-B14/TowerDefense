@@ -47,25 +47,25 @@ public class Grille {
 
         for(Sommet s : this.listeAdj.keySet()){
 
-                if (this.dansGrille(s.getX() - 1, s.getY()) && this.terrain.getList().get(s.getX()-1+(s.getY()*16))==0) {
-                    ( this.listeAdj.get(s)).add(this.getSommet(s.getX() - 1, s.getY()));
-                }
-
-                if (this.dansGrille(s.getX() + 1, s.getY()) && this.terrain.getList().get(s.getX()+1+(s.getY()*16))==0) {
-                    ( this.listeAdj.get(s)).add(this.getSommet(s.getX() + 1, s.getY()));
-                }
-
-                if (this.dansGrille(s.getX(), s.getY() + 1) && this.terrain.getList().get(s.getX()+((s.getY()+1)*16))==0) {
-                    ( this.listeAdj.get(s)).add(this.getSommet(s.getX(), s.getY() + 1));
-                }
-
-                if (this.dansGrille(s.getX(), s.getY() - 1) && this.terrain.getList().get(s.getX()+((s.getY()-1)*16))==0) {
-                    (this.listeAdj.get(s)).add(this.getSommet(s.getX(), s.getY() - 1));
-                }
-
-            System.out.println("sommet : " + s+ ", adj" + this.listeAdj.get(s));
-
+            if (this.dansGrille(s.getX() - 1, s.getY())) {
+                ( this.listeAdj.get(s)).add(this.getSommet(s.getX() - 1, s.getY()));
             }
+
+            if (this.dansGrille(s.getX() + 1, s.getY()) ) {
+                ( this.listeAdj.get(s)).add(this.getSommet(s.getX() + 1, s.getY()));
+            }
+
+            if (this.dansGrille(s.getX(), s.getY() + 1) ) {
+                ( this.listeAdj.get(s)).add(this.getSommet(s.getX(), s.getY() + 1));
+            }
+
+            if (this.dansGrille(s.getX(), s.getY() - 1) ) {
+                (this.listeAdj.get(s)).add(this.getSommet(s.getX(), s.getY() - 1));
+            }
+
+            //System.out.println("sommet : " + s+ ", adj" + this.listeAdj.get(s));
+
+        }
     }
 
     // Cette méthode recherche un sommet par ses coordonnées parmi la listeAdj
@@ -78,12 +78,12 @@ public class Grille {
                 return null;
             }
             sommet = (Sommet)ListAdj.next();
-        }while(sommet.getX() != x && sommet.getY() != y);
-
+        }while(sommet.getX() != x || sommet.getY() != y);
+        //System.out.println("Methode getSommet :  x : " + x + "; y : "+ y + "sommet "+ sommet);
         return sommet;
     }
 
-    public boolean dansGrille (int x, int y){return x >= 0 && x < this.largeur && y >= 0 && y < this.hauteur && this.terrain.getList().get(x+(y*16))==0;}
+    public boolean dansGrille (int x, int y){return x >= 0 && x < this.largeur && y >= 0 && y < this.hauteur && this.terrain.getList().get(x+(y*32))==0;}
 
 
 
