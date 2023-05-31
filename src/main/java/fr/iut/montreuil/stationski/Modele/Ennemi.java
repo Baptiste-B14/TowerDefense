@@ -28,8 +28,8 @@ public class Ennemi extends Entite {
 
     public void deplacement () {
         //deplacement tres simple
-        posX.setValue(posX.getValue() + (int) (Math.random() * 4) - 1 + vitesse);
-        posY.setValue(posY.getValue() + (int) (Math.random() * 4) - 1 + vitesse);
+       // posX.setValue(posX.getValue() + (int) (Math.random() * 4) - 1 + vitesse);
+        //posY.setValue(posY.getValue() + (int) (Math.random() * 4) - 1 + vitesse);
 
 
         if (this.parcours.size() > 0) {
