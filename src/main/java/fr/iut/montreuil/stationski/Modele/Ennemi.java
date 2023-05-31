@@ -30,6 +30,19 @@ public class Ennemi extends Entite {
         //deplacement tres simple
         posX.setValue(posX.getValue()+ (int)(Math.random()*4)-1+ vitesse);
         posY.setValue(posY.getValue()+ (int)(Math.random()*4)-1+ vitesse);
+        
+        
+        
+        
+        if (this.parcours.size() > 0) {
+            this.posX.setValue(((Sommet)this.parcours.get(0)).getX());
+            this.posY.setValue(((Sommet)this.parcours.get(0)).getY());
+            this.parcours.remove(0);
+
+            for(int i = 0; i < this.vitesse - 1 && this.parcours.size() > this.vitesse; ++i) {
+                this.parcours.remove(0);
+            }
+        }
     }
 
 
