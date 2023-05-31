@@ -15,7 +15,7 @@ public class Vague {
     private double pourcentChanceYeti;
     private ObservableList<Ennemi> listEnnemis;
     private Environnement env;
-    private Dijkstra dijkstra;
+
     public Vague (int numeroVague, double pourcentChanceSkieur, double pourcentChanceSnowboardeur, double pourcentChangeLuge, double pourcentChanceYeti, Environnement env){
         this.numeroVague=numeroVague; // this.numeroVague = 0;
         this.pourcentChanceSkieurBasique =pourcentChanceSkieur;
@@ -24,7 +24,6 @@ public class Vague {
         this.pourcentChanceYeti=pourcentChanceYeti;
         this.listEnnemis= FXCollections.observableArrayList();
         this.env = env;
-        this.dijkstra = new Dijkstra(this.env.getTerrain());
 
     }
 
@@ -55,15 +54,18 @@ public class Vague {
 
         // Génération des ennemis jusqu'à avoir 10 ennemis :
         while (this.listEnnemis.size()<10){
-            if ((Math.random() * 1)<this.pourcentChanceSkieurBasique)
-                this.listEnnemis.add(new SkieurBasique(100, this.dijkstra.getSource().getX(), this.dijkstra.getSource().getY(), 1, env, 5, this.dijkstra.getParcours())); // new Skieur
 
-            if ((Math.random() * 1)<this.pourcentChanceSnowboardeur)
-                this.listEnnemis.add(new Ennemi(100, this.dijkstra.getSource().getX(), this.dijkstra.getSource().getY(), 2, env, 10, this.dijkstra.getParcours())); // new Snowboardeur
+            if ((Math.random() * 1)<this.pourcentChanceSkieurBasique) {
+                this.listEnnemis.add(new SkieurBasique(100, this.env.getTerrain().getSource().getX() * 16, this.env.getTerrain().getSource().getY() * 16, 1, env, 5, new Dijkstra(this.env.getTerrain()))); // new Skieur
+            }
+            if ((Math.random() * 1)<this.pourcentChanceSnowboardeur){
+                this.listEnnemis.add(new Ennemi(100, this.env.getTerrain().getSource().getX()*16, this.env.getTerrain().getSource().getY()*16, 2, env, 10, new Dijkstra(this.env.getTerrain()))); // new Snowboardeur
 
-            if ((Math.random() * 1)<this.pourcentChanceLuge)
-                this.listEnnemis.add(new Ennemi(100, this.dijkstra.getSource().getX(), this.dijkstra.getSource().getY(), 2, env, 15, this.dijkstra.getParcours())); // new Luge
+            }
+            if ((Math.random() * 1)<this.pourcentChanceLuge) {
+                this.listEnnemis.add(new Ennemi(100, this.env.getTerrain().getSource().getX() * 16, this.env.getTerrain().getSource().getY() * 16, 2, env, 15, new Dijkstra(this.env.getTerrain()))); // new Luge
 
+            }
 
         }
     }
