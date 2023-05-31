@@ -12,14 +12,19 @@ public class Terrain {
     private ArrayList<Integer>listeTerrain;
 
     private int nbSpawn;
+    private Sommet source;
+    private Sommet cible;
 
 
-    public Terrain(int largeur, int hauteur, int nbSpawn){
+    public Terrain(int largeur, int hauteur, int nbSpawn, Sommet source, Sommet cible){
 
         this.largeurCase = largeur;
         this.hauteurCase = hauteur;
         //this.objectif = createObj();
+
         this.nbSpawn = nbSpawn;
+        this.source = source;
+        this.cible= cible;
         //this.listeSpawn = createSpawn(nbSpawn);
 
 
@@ -57,7 +62,7 @@ public class Terrain {
                 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
                 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
                 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
-                ));
+        ));
         //this.listeTerrain = new ArrayList<Integer>(Arrays.asList(createTableauTerrain()));
     }
 
@@ -154,7 +159,7 @@ public class Terrain {
         Integer[] tableTerrain = new Integer[largeurCase* hauteurCase];
         for(int indice = 0; indice<this.hauteurCase*this.largeurCase; indice++){
 
-                tableTerrain[indice] = ((int)(Math.random()*4)/3);
+            tableTerrain[indice] = ((int)(Math.random()*4)/3);
 
         }
 
@@ -168,6 +173,10 @@ public class Terrain {
         return tableTerrain;
     }
 
+    public int getLargeurCase () { return this.largeurCase;}
+    public int getHauteurCase() {return this.hauteurCase;}
 
-
+    public ArrayList<Integer> getTerrain() { return this.listeTerrain;}
+    public Sommet getCible (){return this.cible;}
+    public Sommet getSource(){return this.source;}
 }
