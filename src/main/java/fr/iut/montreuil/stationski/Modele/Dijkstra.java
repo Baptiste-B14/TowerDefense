@@ -31,6 +31,7 @@ public class Dijkstra {
         LinkedList<Sommet> listeaAnalyser = new LinkedList<>();
         listeaAnalyser.add(this.source);
         this.source.setReached(true);
+        this.cible.setReached(false);
         Sommet courant;
         while (!listeaAnalyser.isEmpty() && !cible.isReached()) {
 
@@ -62,6 +63,7 @@ public class Dijkstra {
                 courant = predecesseurs.get(courant);
             }
         }
+
 
 
     }
