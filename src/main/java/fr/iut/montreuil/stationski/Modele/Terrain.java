@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class Terrain {
     private int largeurCase, hauteurCase;
-    private int[] objectif ;
+
     private ArrayList<int[]> listeSpawn;
 
     private ArrayList<Integer>listeTerrain;
@@ -105,12 +105,6 @@ public class Terrain {
         return obj;
     }
 
-    public int getObjX(){
-        return this.objectif[0];
-    }
-    public int getObjY(){
-        return this.objectif[1];
-    }
 
     public ArrayList<int[]> createSpawn(int nbSpawn){
         ArrayList<int[]> spawns = new ArrayList<int[]>();
@@ -168,15 +162,15 @@ public class Terrain {
             tableTerrain[listeSpawn.get(i)[1]*16 + listeSpawn.get(i)[0] ] = 3;
         }
 */
-        tableTerrain[getObjY() + getObjX()] = 4;
+        tableTerrain[this.cible.getY() + this.cible.getX()] = 4;
 
         return tableTerrain;
     }
 
-        public int getLargeurCase () { return this.largeurCase;}
-        public int getHauteurCase() {return this.hauteurCase;}
+    public int getLargeurCase () { return this.largeurCase;}
+    public int getHauteurCase() {return this.hauteurCase;}
 
-        public ArrayList<Integer> getTerrain() { return this.listeTerrain;}
-        public Sommet getCible (){return this.cible;}
-        public Sommet getSource(){return this.source;}
+    public ArrayList<Integer> getTerrain() { return this.listeTerrain;}
+    public Sommet getCible (){return this.cible;}
+    public Sommet getSource(){return this.source;}
 }
