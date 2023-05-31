@@ -64,8 +64,8 @@ public class Environnement {
 
             }
         }
-
-        this.vague.prochaineVague();
+        if (this.vague.getListEnnemis().isEmpty())
+            this.vague.prochaineVague();
 
 
     }
